@@ -18,6 +18,7 @@ print("\{U+2730}")'''
     # Filtering the 'None' type data..
 
 product = "Apple iPhone 12 (64GB) - (Product) RED"
+product1 = "Colour: Space BlackSize: 256 GB"
 variant = None
 
 if variant != None:
@@ -30,5 +31,10 @@ elif variant == None:
     product_name = product_name.strip() + " (Generated_from_Title)"
     size = size.split(')')[0].strip() + " (Generated_from_Title)"
     colour = colour.split(')')[-1].strip() + " (Generated_from_Title)"
+
+if "Apple" in product:
+    response = product.index("iPhone")
+
+print(response)
 
 print(product_name, " | ", size, " | ", colour)

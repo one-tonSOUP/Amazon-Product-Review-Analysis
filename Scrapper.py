@@ -21,21 +21,15 @@ def get_star(rating):
 
 def get_variant(product, review):
     variant = review.find('span', {'data-hook': 'format-strip-linkless'})
-    product_name = product
-    size = "Not Available"
-    colour = "Not Available"
     # Filtering the 'None' type data..
-    if variant != None:
-        variant = variant.text
-        temp, product_name = str(variant).split("Pattern name: ")
-        temp, size = temp.split("Size: ")
-        temp, colour = temp.split("Colour: ")
-    elif variant == None:
-        product_name, size, colour = product.split('(')
-        product_name = product_name.strip() + " (Generated_from_Title)"
-        size = size.split(')')[0].strip() + " (Generated_from_Title)"
-        colour = colour.split(')')[-1].strip() + " (Generated_from_Title)"
-    return product_name, size, colour
+    try:
+        if variant != None:
+            variant = variant.text
+        elif variant == None:
+            variant = product + " (Unavailable, Generated_from_Title)"
+    except:
+        variant = "Unavaliable"
+    return variant
 
 def get_vote(review):
     vote = review.find('span', class_ = "a-size-base a-color-tertiary cr-vote-text")
@@ -69,18 +63,16 @@ def scrape(url):
         date = review.find('span', class_ = "a-size-base a-color-secondary review-date").text
         comment = review.find('a', class_ = "a-size-base a-link-normal review-title a-color-base review-title-content a-text-bold").text.strip()
         body = review.find('div', class_ = "a-expander-content reviewText review-text-content a-expander-partial-collapse-content").text.strip()
-        product_name, size, colour = get_variant(product, review)
+        variant = get_variant(product, review)
         vote = get_vote(review)
         img_links = get_review_images(review)
 
-        #['Customer Name', 'Product Name', 'Size', 'Colour', 'Rating(Out of 5)', 'Rating', 'Date of Review', 'Comment', 'Review', 'Images attatched by Customer', 'Votes on the Review']
-        fetched_reviews.append([customer_name, product_name, size, colour, rating, get_star(rating), date, comment, body, img_links, vote])
+        #['Customer Name', 'Variant', 'Rating(Out of 5)', 'Rating', 'Date of Review', 'Comment', 'Review', 'Images attatched by Customer', 'Votes on the Review']
+        fetched_reviews.append([customer_name, variant, rating, get_star(rating), date, comment, body, img_links, vote])
 
         # Printing the details..
         print("\n\n\n\nNAME      :   ", customer_name)
-        print("PRODUCT   :   ", product_name)
-        print("COLOUR    :   ", colour)
-        print("SIZE      :   ", size)
+        print("VARIANT   :   ", variant)
         print("RATING    :   ", rating)
         print("DATE      :   ", date.encode("utf-8"))       # '.encode("utf-8")' is required only in Visual Studio Code or CMD, not required if used in Colab..
         print("COMMENT   :   ", comment.encode("utf-8"))    # '.encode("utf-8")' is required only in Visual Studio Code or CMD, not required if used in Colab..
@@ -97,7 +89,7 @@ def save_to_csv(product, fetched_reviews):
     # write the information to a CSV file
     with open(file_path, 'w', newline='', encoding='utf-8') as csvfile:
         csv_writer = csv.writer(csvfile)
-        csv_writer.writerow(['Customer Name', 'Product Name', 'Size', 'Colour', 'Rating(Out of 5)', 'Rating', 'Date of Review', 'Comment', 'Review', 'Images attatched by Customer', 'Votes on the Review'])
+        csv_writer.writerow(['Customer Name', 'Variant', 'Rating(Out of 5)', 'Rating', 'Date of Review', 'Comment', 'Review', 'Images attatched by Customer', 'Votes on the Review'])
         csv_writer.writerows(fetched_reviews)
     
     # Get the absolute path of the file
@@ -110,7 +102,8 @@ def save_to_csv(product, fetched_reviews):
 def save_to_json():
     pass
 
-url = 'https://p-nt-www-amazon-in-kalias.amazon.in/New-Apple-iPhone-12-128GB/dp/B08L5VJWCV?th=1'
+#url = 'https://p-nt-www-amazon-in-kalias.amazon.in/New-Apple-iPhone-12-128GB/dp/B08L5VJWCV?th=1'
+url = 'https://p-nt-www-amazon-in-kalias.amazon.in/dp/B0BDJH6GL8?th=1'
 
 if __name__ == "__main__":
     scrape(url)
