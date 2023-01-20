@@ -38,3 +38,7 @@ if "Apple" in product:
 print(response)
 
 print(product_name, " | ", size, " | ", colour)
+
+a = "Xiaomi 12 Pro  5G (Opera Muave, 12GB RAM, 256GB Storage) Snapdragon 8 Gen 1  50+50+50MP Flagship Cameras (OIS)  10bit 2K+ Curved AMOLED Display  Sound by Harman Kardon(Product Page, Visited on January 20 2023, 23-50-07).csv"
+print(len(a))
+print(a[0:50])

@@ -85,6 +85,13 @@ def scrape(url):
     
 def save_to_csv(product, fetched_reviews):
     page_visit_details = datetime.now().strftime("%B %d %Y, %H-%M-%S")
+    # Applying this filter because the file cannot be saved into the system with these special characters in file name..
+    replace_characters = [':', '\\', '|', '/', '*', '?', '"', '<', '>']
+    for char in replace_characters:
+        if char in product:
+            product = product.replace(char, "")
+    # Too long name seems to be an issue while adding these files in github so set the limit of the filename to 60 characters..
+    product = product[0:60]
     file_path = product + '(Product Page, Visited on ' + str(page_visit_details) + ').csv'
     # write the information to a CSV file
     with open(file_path, 'w', newline='', encoding='utf-8') as csvfile:
@@ -103,7 +110,8 @@ def save_to_json():
     pass
 
 #url = 'https://p-nt-www-amazon-in-kalias.amazon.in/New-Apple-iPhone-12-128GB/dp/B08L5VJWCV?th=1'
-url = 'https://p-nt-www-amazon-in-kalias.amazon.in/dp/B0BDJH6GL8?th=1'
+#url = 'https://p-nt-www-amazon-in-kalias.amazon.in/dp/B0BDJH6GL8?th=1'
+url = 'https://p-nt-www-amazon-in-kalias.amazon.in/Xiaomi-Storage-Snapdragon-Flagship-Cameras/dp/B09XBCCQJT?th=1'
 
 if __name__ == "__main__":
     scrape(url)
