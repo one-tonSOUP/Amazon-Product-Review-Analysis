@@ -111,7 +111,8 @@ def save_to_json():
 
 #url = 'https://p-nt-www-amazon-in-kalias.amazon.in/New-Apple-iPhone-12-128GB/dp/B08L5VJWCV?th=1'
 #url = 'https://p-nt-www-amazon-in-kalias.amazon.in/dp/B0BDJH6GL8?th=1'
-url = 'https://p-nt-www-amazon-in-kalias.amazon.in/Xiaomi-Storage-Snapdragon-Flagship-Cameras/dp/B09XBCCQJT?th=1'
+#url = 'https://p-nt-www-amazon-in-kalias.amazon.in/Xiaomi-Storage-Snapdragon-Flagship-Cameras/dp/B09XBCCQJT?th=1'
+url = 'https://p-nt-www-amazon-in-kalias.amazon.in/dp/B00NXEINKE/ref=sspa_dk_detail_1?pd_rd_i=B00NXEINKE&pd_rd_w=TJ9mM&content-id=amzn1.sym.6c74ac28-0eba-4461-ba39-7b1bc57f1b6e&pf_rd_p=6c74ac28-0eba-4461-ba39-7b1bc57f1b6e&pf_rd_r=PWTRNSS1TADH4GY2SYR0&pd_rd_wg=N93dj&pd_rd_r=4fd17522-0fb1-4d8d-ade8-6764077133af&s=electronics&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWwy&th=1'
 
 if __name__ == "__main__":
     scrape(url)
