@@ -1,6 +1,12 @@
+#           FILE FOR TESTING FEW CONCEPTS TO AVOID ERRORS..
+
+
+
+
+
 # Extract rating from the string..
 
-'''star = "5.0 out of 5 stars"
+star = "5.0 out of 5 stars"
 rating = star.split("out")[0].strip()
 print(rating)
 print(type(rating))
@@ -8,7 +14,7 @@ rating = float(rating)
 print(rating)
 print(type(rating))
 
-print("\{U+2730}")'''
+print("\{U+2730}")
 
 #def get_variant(product, review):
 #    variant = review.find('span', {'data-hook': 'format-strip-linkless'})
